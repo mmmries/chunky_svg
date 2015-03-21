@@ -1,4 +1,4 @@
-defmodule ChunkySvg do
+defmodule ChunkySVG do
   def render(content) do
     {:svg, %{viewBox: "0 0 100 100"}, expand(content)} |> XmlBuilder.generate
   end

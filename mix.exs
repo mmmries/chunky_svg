@@ -1,4 +1,4 @@
-defmodule ChunkySvg.Mixfile do
+defmodule ChunkySVG.Mixfile do
   use Mix.Project
 
   def project do
