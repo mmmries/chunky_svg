@@ -1,4 +1,4 @@
-Chubby Png
+Chunky SVG
 =========
 
 This library is inspired by [the Ruby library "Chunky PNG"](https://github.com/wvanbergen/chunky_png).
