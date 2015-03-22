@@ -36,4 +36,20 @@ ChunkySVG also knows how to draw other things in terms of SVG primitives:
       <img height="100" width="100" src="http://mmmries.github.io/chunky_svg/examples/hexagon.svg" />
     </td>
   </tr>
+  <tr>
+    <td>
+      `{:pentagon, %{cx: 50, cy: 50, r: 40}}`
+    </td>
+    <td>
+      <img height="100" width="100" src="http://mmmries.github.io/chunky_svg/examples/pentagon.svg" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      `{:octagon, %{cx: 50, cy: 50, r: 40}}`
+    </td>
+    <td>
+      <img height="100" width="100" src="http://mmmries.github.io/chunky_svg/examples/octagon.svg" />
+    </td>
+  </tr>
 </table>
