@@ -2,10 +2,16 @@ defmodule ChunkySVG.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :chunky_svg,
-     version: "0.0.1",
-     elixir: "~> 1.0",
-     deps: deps]
+    [
+      app: :chunky_svg,
+      version: "0.0.1",
+      elixir: "~> 1.0",
+      deps: deps,
+      package: package,
+      description: """
+        A library for drawing things with SVG
+      """,
+    ]
   end
 
   # Configuration for the OTP application
@@ -27,6 +33,14 @@ defmodule ChunkySVG.Mixfile do
   defp deps do
     [
       {:xml_builder, "~> 0.0.5"},
+    ]
+  end
+
+  defp package do
+    [
+      contributors: ["Michael Ries"],
+      licenses: ["MIT"],
+      links: %{github: "https://github.com/mmmries/chunky_svg"},
     ]
   end
 end
