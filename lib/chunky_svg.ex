@@ -1,4 +1,8 @@
 defmodule ChunkySVG do
+  def render(content) when is_tuple(content) do
+    render([content])
+  end
+
   def render(content) do
     {:svg, %{viewBox: "0 0 100 100", xmlns: "http://www.w3.org/2000/svg"}, expand(content)} |> XmlBuilder.generate
   end

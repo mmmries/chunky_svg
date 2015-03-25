@@ -3,5 +3,4 @@ otp_release:
  - 17.1
  - 17.4
 elixir:
- - 0.15
  - 1.0
