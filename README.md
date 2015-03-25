@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/mmmries/chunky_svg.svg)](https://travis-ci.org/mmmries/chunky_svg)
+
 Chunky SVG
 =========
 
