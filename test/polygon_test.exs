@@ -2,17 +2,33 @@ defmodule PolygonTest do
   use ExUnit.Case
 
   test "renders a pentagon" do
-    expected = "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\">\n\t<polygon points=\"5.00000000000000000000e+01 9.00000000000000000000e+01 8.80422606518061456882e+01 6.23606797749978980505e+01 7.35114100916989343659e+01 1.76393202250021090549e+01 2.64885899083010798449e+01 1.76393202250021019495e+01 1.19577393481938543118e+01 6.23606797749978909451e+01\"/>\n</svg>"
-    assert ChunkySVG.render({:pentagon, %{cx: 50, cy: 50, r: 40}}) == expected
+    rendered = ChunkySVG.render({:pentagon, %{cx: 50, cy: 50, r: 40}})
+    starts_with_svg_header(rendered)
+    points_close_to(rendered, [50.0, 90.0, 88.0, 62.4, 73.5, 17.6, 26.5, 17.6, 12.0, 62.4])
   end
 
   test "renders a hexagon" do
-    expected = "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\">\n\t<polygon points=\"5.00000000000000000000e+01 9.00000000000000000000e+01 8.46410161513775420872e+01 7.00000000000000000000e+01 8.46410161513775562980e+01 3.00000000000000071054e+01 5.00000000000000071054e+01 1.00000000000000000000e+01 1.53589838486224650183e+01 2.99999999999999822364e+01 1.53589838486224365965e+01 6.99999999999999715783e+01\"/>\n</svg>"
-    assert ChunkySVG.render({:hexagon, %{cx: 50, cy: 50, r: 40}}) == expected
+    rendered = ChunkySVG.render({:hexagon, %{cx: 50, cy: 50, r: 40}})
+    starts_with_svg_header(rendered)
+    points_close_to(rendered, [50.0, 90.0, 84.6, 70.0, 84.6, 30.0, 50.0, 10.0, 15.4, 30.0, 15.4, 70.0])
   end
 
   test "renders an octagon" do
-    expected = "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\">\n\t<polygon points=\"5.00000000000000000000e+01 9.00000000000000000000e+01 7.82842712474619020213e+01 7.82842712474619020213e+01 9.00000000000000000000e+01 5.00000000000000000000e+01 7.82842712474619020213e+01 2.17157287525381015314e+01 5.00000000000000071054e+01 1.00000000000000000000e+01 2.17157287525381015314e+01 2.17157287525380908733e+01 1.00000000000000000000e+01 4.99999999999999928946e+01 2.17157287525380908733e+01 7.82842712474619020213e+01\"/>\n</svg>"
-    assert ChunkySVG.render({:octagon, %{cx: 50, cy: 50, r: 40}}) == expected
+    rendered = ChunkySVG.render({:octagon, %{cx: 50, cy: 50, r: 40}})
+    starts_with_svg_header(rendered)
+    points_close_to(rendered, [50.0, 90.0, 78.3, 78.3, 90.0, 50.0, 78.3, 21.7, 50, 10.0, 21.7, 21.7, 10.0, 50.0, 21.7, 78.3])
+  end
+
+  defp points_close_to(str, reference_numbers) do
+    len = String.length(str)
+    string_of_numbers = str |> String.slice(81, len - 81 - 10)
+    numbers = string_of_numbers |> String.split(" ") |> Enum.map(&String.to_float/1)
+    Enum.zip(numbers, reference_numbers) |> Enum.each fn ({number, reference}) ->
+      assert_in_delta number, reference, 0.1
+    end
+  end
+
+  def starts_with_svg_header(str) do
+    assert String.slice(str, 0,62) == "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\">"
   end
 end
