@@ -31,5 +31,13 @@ defmodule ChunkySVG.Macro do
       shape -> shape
     end
   end
+  defp inline({label, attributes}, macros) do
+    case macros[label] do
+      nil -> {label, attributes}
+      {mlabel, mattributes, mcontents} ->
+        merged_attributes = Dict.merge(mattributes, attributes)
+        {mlabel, merged_attributes, mcontents}
+    end
+  end
   defp inline(drawing, _macros), do: drawing
 end
