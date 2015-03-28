@@ -1,19 +1,8 @@
-defmodule ChunkySVG.Macro do
+defmodule ChunkySVG.InlineMacro do
   def expand(drawing) do
-    inline_macros = extract_macros(drawing)
-    drawing |> inline(inline_macros) |> builtin
+    macros = extract_macros(drawing)
+    inline(drawing, macros)
   end
-
-  defp builtin({:triangle, attributes}), do: ChunkySVG.Polygon.render_n_sided(3, attributes)
-  defp builtin({:hexagon, attributes}), do: ChunkySVG.Polygon.render_n_sided(6, attributes)
-  defp builtin({:octagon, attributes}), do: ChunkySVG.Polygon.render_n_sided(8, attributes)
-  defp builtin({:pentagon, attributes}), do: ChunkySVG.Polygon.render_n_sided(5, attributes)
-  defp builtin({:background, color}), do: {:rect, %{x: 0, y: 0, height: 100, width: 100, fill: color}, nil}
-  defp builtin({:hills, attributes}), do: ChunkySVG.Hills.expand(attributes)
-  defp builtin(list) when is_list(list) do
-    Enum.map(list, &builtin/1)
-  end
-  defp builtin(drawing), do: drawing # Pass Through Rule
 
   defp extract_macros({:def, label, shape}), do: [{label, shape}]
   defp extract_macros(drawing) when is_list(drawing) do

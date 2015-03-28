@@ -1,6 +1,6 @@
 defmodule InlineMacrosTest do
   use ExUnit.Case
-  import ChunkySVG.Macro
+  import ChunkySVG.InlineMacro
 
   test "expands simple macros defined in the drawing" do
     drawing = [
