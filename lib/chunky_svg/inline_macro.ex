@@ -13,11 +13,13 @@ defmodule ChunkySVG.InlineMacro do
   defp inline(drawing, macros) when is_list(drawing) do
     Enum.map(drawing, &(inline(&1,macros))) |> Enum.filter(&(&1))
   end
-  defp inline({:def, _label, _shape}, macros), do: nil
+  defp inline({:def, _label, _shape}, _macros), do: nil
   defp inline({label}, macros) do
     case macros[label] do
       nil -> {label}
-      shape -> shape
+      {mlabel, mattributes, mcontents} ->
+        expanded_contents = inline(mcontents, macros)
+        {mlabel, mattributes, expanded_contents}
     end
   end
   defp inline({label, attributes}, macros) do
@@ -25,7 +27,8 @@ defmodule ChunkySVG.InlineMacro do
       nil -> {label, attributes}
       {mlabel, mattributes, mcontents} ->
         merged_attributes = Dict.merge(mattributes, attributes)
-        {mlabel, merged_attributes, mcontents}
+        expanded_contents = inline(mcontents, macros)
+        {mlabel, merged_attributes, expanded_contents}
     end
   end
   defp inline(drawing, _macros), do: drawing
