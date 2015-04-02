@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/mmmries/chunky_svg.svg)](https://travis-ci.org/mmmries/chunky_svg)
+[![Hex.pm](https://img.shields.io/hexpm/v/chunky_svg.svg)](https://hex.pm/packages/chunky_svg)
 
 Chunky SVG
 =========
