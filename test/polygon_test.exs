@@ -23,9 +23,9 @@ defmodule PolygonTest do
     len = String.length(str)
     string_of_numbers = str |> String.slice(81, len - 81 - 10)
     numbers = string_of_numbers |> String.split(" ") |> Enum.map(&String.to_float/1)
-    Enum.zip(numbers, reference_numbers) |> Enum.each fn ({number, reference}) ->
+    Enum.zip(numbers, reference_numbers) |> Enum.each(fn ({number, reference}) ->
       assert_in_delta number, reference, 0.1
-    end
+    end)
   end
 
   def starts_with_svg_header(str) do
