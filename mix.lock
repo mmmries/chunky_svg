@@ -1,1 +1,1 @@
-%{"xml_builder": {:hex, :xml_builder, "0.0.5"}}
+%{"xml_builder": {:hex, :xml_builder, "0.0.5", "fa1d7577974a2fb21835bc841df5e7e54586d461179b56259c651751508b892d", [:mix], []}}
