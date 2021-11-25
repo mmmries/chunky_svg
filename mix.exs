@@ -10,7 +10,7 @@ defmodule ChunkySVG.Mixfile do
       package: package(),
       description: """
         A library for drawing things with SVG
-      """,
+      """
     ]
   end
 
@@ -23,7 +23,7 @@ defmodule ChunkySVG.Mixfile do
 
   defp deps do
     [
-      {:xml_builder, "~> 2.0"},
+      {:xml_builder, "~> 2.0"}
     ]
   end
 
@@ -31,7 +31,7 @@ defmodule ChunkySVG.Mixfile do
     [
       contributors: ["Michael Ries"],
       licenses: ["MIT"],
-      links: %{github: "https://github.com/mmmries/chunky_svg"},
+      links: %{github: "https://github.com/mmmries/chunky_svg"}
     ]
   end
 end
