@@ -1,0 +1,61 @@
+name: Elixir CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  MIX_ENV: test
+
+jobs:
+  lint:
+    name: Code Linting
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Elixir
+      uses: erlef/setup-beam@988e02bfe678367a02564f65ca2e37726dc0268f
+      with:
+        elixir-version: 1.12.3
+        otp-version: 24.1
+    - name: Restore dependencies cache
+      uses: actions/cache@v2
+      with:
+        path: deps
+        key: ${{ runner.os }}-24.1-1.12.3-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: ${{ runner.os }}-24.1-1.12.3-mix-
+    - name: Install dependencies
+      run: mix deps.get
+    - name: Check Formatting
+      run: mix format --check-formatted
+
+  build:
+
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        elixir: [1.12.3, 1.11.4, 1.10.4, 1.9.4]
+        otp: [24.1, 23.3, 22.3]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Elixir
+      uses: erlef/setup-beam@988e02bfe678367a02564f65ca2e37726dc0268f
+      with:
+        elixir-version: ${{ matrix.elixir }}
+        otp-version: ${{ matrix.otp }}
+    - name: Restore dependencies cache
+      uses: actions/cache@v2
+      with:
+        path: deps
+        key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-
+    - name: Install dependencies
+      run: mix deps.get
+    - name: Run tests
+      run: mix test

@@ -4,13 +4,16 @@ defmodule ChunkySVG do
   end
 
   def render(drawing) when is_list(drawing) do
-    drawing = drawing |>
-      ChunkySVG.Builtin.expand |>
-      ChunkySVG.InlineMacro.expand
+    drawing =
+      drawing
+      |> ChunkySVG.Builtin.expand()
+      |> ChunkySVG.InlineMacro.expand()
+
     {
       :svg,
       %{viewBox: "0 0 100 100", xmlns: "http://www.w3.org/2000/svg"},
       drawing
-    } |> XmlBuilder.generate
+    }
+    |> XmlBuilder.generate()
   end
 end
