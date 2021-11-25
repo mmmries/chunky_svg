@@ -26,7 +26,7 @@ defmodule ChunkySVG.InlineMacro do
     case macros[label] do
       nil -> {label, attributes}
       {mlabel, mattributes, mcontents} ->
-        merged_attributes = Dict.merge(mattributes, attributes)
+        merged_attributes = Map.merge(mattributes, attributes)
         expanded_contents = inline(mcontents, macros)
         {mlabel, merged_attributes, expanded_contents}
     end

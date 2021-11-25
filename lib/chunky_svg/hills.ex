@@ -7,7 +7,7 @@ defmodule ChunkySVG.Hills do
     bez_points = bez_points |> List.flatten |> Enum.map(fn ({x,y}) -> "#{x},#{y}" end)
     bez_points = bez_points |> Enum.join(" ")
     path_spec = "M0,100 Q#{bez_points} L100,100 z"
-    attributes = attributes |> Dict.drop([:points]) |> Dict.put(:d, path_spec)
+    attributes = attributes |> Map.drop([:points]) |> Map.put(:d, path_spec)
     {:path, attributes, nil}
   end
 end

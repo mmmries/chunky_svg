@@ -4,7 +4,7 @@ defmodule Mix.Tasks.GenerateExamples do
   @shortdoc "generates a bunch of sample svgs"
 
   def run(_argv) do
-    examples |> Enum.each(&generate_example/1)
+    examples() |> Enum.each(&generate_example/1)
   end
 
   defp examples do

@@ -7,7 +7,7 @@ defmodule ChunkySVG.Polygon do
       [cx + r * :math.sin(angle), cy + r * :math.cos(angle) ]
     end)
     points = points |> List.flatten |> Enum.map(&Float.to_string/1) |> Enum.join(" ")
-    attributes = attributes |> Dict.drop([:r, :cx, :cy]) |> Dict.put(:points, points)
+    attributes = attributes |> Map.drop([:r, :cx, :cy]) |> Map.put(:points, points)
     {:polygon, attributes, nil}
   end
 end
