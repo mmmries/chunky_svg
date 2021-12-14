@@ -1,5 +1,6 @@
 defmodule ChunkySVG.Builtin do
   def expand({:triangle, attributes}), do: ChunkySVG.Polygon.render_n_sided(3, attributes)
+  def expand({:square, attributes}), do: ChunkySVG.Polygon.render_n_sided(4, attributes)
   def expand({:hexagon, attributes}), do: ChunkySVG.Polygon.render_n_sided(6, attributes)
   def expand({:octagon, attributes}), do: ChunkySVG.Polygon.render_n_sided(8, attributes)
   def expand({:pentagon, attributes}), do: ChunkySVG.Polygon.render_n_sided(5, attributes)

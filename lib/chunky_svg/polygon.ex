@@ -2,7 +2,7 @@ defmodule ChunkySVG.Polygon do
   def render_n_sided(n, attributes) when n > 2 do
     %{r: r, cx: cx, cy: cy} = attributes
     theta = 2 * :math.pi() / n
-    angles = 0..(n - 1) |> Enum.map(fn n -> theta * n end)
+    angles = 0..(n - 1) |> Enum.map(fn n -> (theta * n) + (theta / 2) end)
 
     points =
       angles
